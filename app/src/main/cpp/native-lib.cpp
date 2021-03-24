@@ -14,15 +14,17 @@ extern "C" JNIEXPORT jstring JNICALL
 Java_com_example_tflitecxx_MainActivity_loadModelJNI(
         JNIEnv* env,
         jobject /* this */,
-        jobject assetManager
+        jobject assetManager,
+        jstring fileName
         ) {
 
     char* buffer = nullptr;
     long size = 0;
+    const char* modelpath = env->GetStringUTFChars(fileName, 0);
 
     if (!(env->IsSameObject(assetManager, NULL))) {
         AAssetManager *mgr = AAssetManager_fromJava(env, assetManager);
-        AAsset *asset = AAssetManager_open(mgr, "centerface.tflite", AASSET_MODE_UNKNOWN);
+        AAsset *asset = AAssetManager_open(mgr, modelpath, AASSET_MODE_UNKNOWN);
         assert(asset != nullptr);
 
         size = AAsset_getLength(asset);

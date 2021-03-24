@@ -7,6 +7,8 @@ import android.widget.TextView;
 
 public class MainActivity extends AppCompatActivity {
 
+    private final String MODEL_FILE = "centerface.tflite";
+
     // Used to load the 'native-lib' library on application startup.
     static {
         System.loadLibrary("native-lib");
@@ -19,7 +21,7 @@ public class MainActivity extends AppCompatActivity {
 
         // Example of a call to a native method
         TextView tv = findViewById(R.id.sample_text);
-        tv.setText(loadModelJNI(this.getAssets()));
+        tv.setText(loadModelJNI(this.getAssets(), MODEL_FILE));
     }
 
     /**
@@ -28,6 +30,6 @@ public class MainActivity extends AppCompatActivity {
      */
 
     // Load model by TF Lite C++ API
-    private native String loadModelJNI(AssetManager assetManager);
+    private native String loadModelJNI(AssetManager assetManager, String fileName);
 
 }
