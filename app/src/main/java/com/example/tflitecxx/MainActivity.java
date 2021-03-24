@@ -1,7 +1,7 @@
 package com.example.tflitecxx;
 
 import androidx.appcompat.app.AppCompatActivity;
-
+import android.content.res.AssetManager;
 import android.os.Bundle;
 import android.widget.TextView;
 
@@ -19,12 +19,15 @@ public class MainActivity extends AppCompatActivity {
 
         // Example of a call to a native method
         TextView tv = findViewById(R.id.sample_text);
-        tv.setText(stringFromJNI());
+        tv.setText(loadModelJNI(this.getAssets()));
     }
 
     /**
      * A native method that is implemented by the 'native-lib' native library,
      * which is packaged with this application.
      */
-    public native String stringFromJNI();
+
+    // Load model by TF Lite C++ API
+    private native String loadModelJNI(AssetManager assetManager);
+
 }
