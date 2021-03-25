@@ -47,5 +47,6 @@ Java_com_example_tflitecxx_MainActivity_loadModelJNI(
     assert(interpreter->AllocateTensors() == kTfLiteOk);
 
     std::string status = "Load TF Lite model successfully!";
+    free(buffer);
     return env->NewStringUTF(status.c_str());
 }
